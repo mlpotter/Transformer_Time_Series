@@ -47,10 +47,10 @@ class time_series_paper(Dataset):
         if torch.is_tensor(idx):
             idx = idx.tolist()
             
-        sample = {"x":self.x[idx,0:t0],
-                  "x_next":self.x[idx,t0:t0+24],
-                  "fx": self.fx[idx,0:t0],
-                  "fx_next":self.fx[idx,t0:t0+24],
+        sample = {"x":self.x[idx,0:self.t0],
+                  "x_next":self.x[idx,self.t0:self.t0+24],
+                  "fx": self.fx[idx,0:self.t0],
+                  "fx_next":self.fx[idx,self.t0:self.t0+24],
                   "attention_masks":self.masks}
         
         if self.transform:
