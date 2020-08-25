@@ -33,6 +33,9 @@ class time_series_paper(Dataset):
                         A3.unsqueeze(1)*torch.sin(np.pi*self.x[0,24:t0]/6)+72,
                         A4.unsqueeze(1)*torch.sin(np.pi*self.x[0,t0:t0+24]/12)+72],1)
         
+        # add noise
+        self.fx = self.fx + torch.randn(self.fx.shape)
+        
         self.masks = self._generate_square_subsequent_mask(24)
                 
         
