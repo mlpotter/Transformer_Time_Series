@@ -47,18 +47,24 @@ class time_series_paper(Dataset):
         if torch.is_tensor(idx):
             idx = idx.tolist()
             
-        sample = {"x":self.x[idx,0:self.t0],
-                  "x_next":self.x[idx,self.t0:self.t0+24],
-                  "fx": self.fx[idx,0:self.t0],
-                  "fx_next":self.fx[idx,self.t0:self.t0+24],
-                  "attention_masks":self.masks}
+        #sample = {"x":self.x[idx,0:self.t0],
+        #          "x_next":self.x[idx,self.t0:self.t0+24],
+        #          "fx": self.fx[idx,0:self.t0],
+        #          "fx_next":self.fx[idx,self.t0:self.t0+24],
+        #          "attention_masks":self.masks}
+        
+        sample = (self.x[idx,0:self.t0],
+                  self.x[idx,self.t0:self.t0+24],
+                  self.fx[idx,0:self.t0],
+                  self.fx[idx,self.t0:self.t0+24],
+                  self.masks)
         
         if self.transform:
             sample=self.transform(sample)
             
         return sample
     
-    def _generate_square_subsequent_mask(self, sz):
-        mask = (torch.tril(torch.ones(sz, sz)) == 1).transpose(0, 1)
-        mask = mask.float().masked_fill(mask == 0, float(0.0)).masked_fill(mask == 1, float('-inf'))
+    def _generate_square_subsequent_mask(self,sz):
+        mask = (torch.triu(torch.ones(sz, sz)) == 1).transpose(0, 1)
+        mask = mask.float().masked_fill(mask == 0, float('-inf')).masked_fill(mask == 1, float(0.0))
         return mask
