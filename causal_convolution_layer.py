@@ -41,5 +41,5 @@ class context_embedding(torch.nn.Module):
 
     def forward(self,x):
         x = self.causal_convolution(x)
-        return F.sigmoid(x)
+        return F.tanh(x)
 
