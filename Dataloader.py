@@ -219,7 +219,9 @@ class time_series_decoder_paper(Dataset):
     
     def _generate_square_subsequent_mask(self,t0):
         mask = torch.zeros(t0+24,t0+24)
-        for i in range(0,t0+24):
-            mask[i,:(i+1)] = 1
-        mask = mask.float().masked_fill(mask == 0, float('-inf')).masked_fill(mask == 1, float(0.0))
+        for i in range(0,t0):
+            mask[i,t0:] = 1 
+        for i in range(t0,t0+24):
+            mask[i,i+1:] = 1
+        mask = mask.float().masked_fill(mask == 1, float('-inf'))#.masked_fill(mask == 1, float(0.0))
         return mask
