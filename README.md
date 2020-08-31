@@ -1,7 +1,8 @@
 # Transformer_Time_Series
 [Enhancing the Locality and Breaking the Memory Bottleneck of Transformer on Time Series Forecasting](https://arxiv.org/pdf/1907.00235.pdf) (NeurIPS 2019)
 
-![Rp](https://github.com/mlpotter/Transformer_Time_Series/blob/master/images/quantile_loss.JPG)
+Able to match the results of the paper for the synthetic dataset as shown in the table below
+![Rp](https://github.com/mlpotter/Transformer_Time_Series/blob/master/images/Rp_table.JPG)
 
 The synthetic dataset was constructed as shown below
 ![Synthetic Dataset](https://github.com/mlpotter/Transformer_Time_Series/blob/master/images/synthetic_datasets.JPG)
